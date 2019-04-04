@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Route,withRouter} from 'react-router-dom'
+// import Home from './components/Home'
+import Login from './components/Login';
+import Register from './components/Register';
+import Main from './components/Auction/Main'
+import Cookie from 'universal-cookie'
+import {keepLogin} from './1.actions'
+import {connect} from 'react-redux'
+
+const cookie = new Cookie()
 
 class App extends Component {
+  componentDidMount(){
+    var dataCookie=cookie.get('userData') 
+    if(dataCookie!==undefined){
+      this.props.keepLogin(dataCookie)
+    }
+  }
+  
+  
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+          {/* <Route path="/" component={Home} exact/> */}
+          <Route path='/' component={Main} exact/>
+          <Route path="/login" component={Login} exact/>
+          <Route path="/register" component={Register} exact/>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(connect(null,{keepLogin})(App));

@@ -1,0 +1,94 @@
+.main{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px,1fr));
+    overflow: hidden;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tone-1{
+    background: url(https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat;
+    background-size: cover;    
+}
+.text-home{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.tone-1 .text-home img{
+    width: 17vw;
+}
+.text-home p{
+    color: yellow;
+    font-size: 2vw;
+    margin-top: 3vh;
+    font-weight: 800;
+    text-shadow: -5px 4px 3px rgba(0,0,0,0.82);
+}
+
+.btn{
+     font-size: 2vw;
+     margin-top: 2vh;
+}
+.btn p{
+    display: inline;
+    color: white !important;
+    border: 3px solid white;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 0.4rem;
+    font-weight: 800;
+    text-shadow: -5px 4px 3px rgba(0,0,0,0.82);
+}
+.btn p:hover{
+    background: black;
+    color: white;
+}
+/* *********************************** */
+.tone-2{
+    background: url(https://images.pexels.com/photos/47344/dollar-currency-money-us-dollar-47344.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat;
+    background-size: cover; 
+    grid-template-columns: 2/4;
+}
+.tone-2 img{
+    height: 90vh;
+    position: absolute;
+    top: 4vh;
+    left: 28vw;
+}
+.tone-2 .infos{
+    background-color: rgba(100,0,100,0.9);
+    width: 20vw;
+    height: 70vh;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 66vw;
+    top: 10vh;
+    justify-content: center;
+    align-items: center;
+    text-shadow: -5px 4px 3px rgba(0,0,0,0.82);
+}
+.tone-2 .infos .infos-title{
+    font-size: 1.7vw;
+    color: yellow;
+}
+.tone-2 .infos .info1{
+    color: white;
+    font-size: 1.7vw;
+    padding: 4vh 0;
+}
+
+
+
+
+

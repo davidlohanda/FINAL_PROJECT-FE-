@@ -1,0 +1,49 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "david",
+      "password": "rahasia123",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "Seto",
+      "password": "rahasia123",
+      "role": "user"
+    },
+    {
+      "username": "jamaludin",
+      "password": "123",
+      "id": 3,
+      "role": "user"
+    },
+    {
+      "username": "anton",
+      "password": "anton123",
+      "email": "anton@gmail.com",
+      "phone": "08162525253",
+      "id": 4
+    },
+    {
+      "username": "doni",
+      "password": "doni123",
+      "email": "doni@gmail.com",
+      "phone": "038452346",
+      "id": 5
+    },
+    {
+      "username": "budi",
+      "password": "budi123",
+      "email": "budi@gmail.com",
+      "phone": "0912342532541",
+      "id": 6
+    },
+    {
+      "username": "joko",
+      "email": "joko@gmail.com",
+      "password": "joko123",
+      "id": 7
+    }
+  ]
+}
