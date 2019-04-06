@@ -36,7 +36,7 @@ class Login extends React.Component{
 
     renderErrorMessage=()=>{
         if(this.props.error !== ''){
-            return <div class="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
+            return <div className="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
                         {this.props.error}
                     </div>
         }
@@ -45,26 +45,26 @@ class Login extends React.Component{
 
     
     render(){
-        if(this.props.username){
+        if(this.props.username && !this.props.error){
             return <Redirect to="/" />
         }
         return(
             <div className="main">
-                <div id="wrapper">
-                    <div className="form-container">
-                        <span className="form-heading">Login</span>
+                <div id="bungkus">
+                    <div className="tempat-form">
+                        <span className="form-title">Login</span>
                         <form>
-                            <div className="input-group">
+                            <div className="inputan">
                                 <i className="fas fa-user" />
                                 <input type="text" placeholder="Username..." ref="username" required />
                                 <span className="bar" />
                             </div>
-                            <div className="input-group">
+                            <div className="inputan">
                                 <i className="fas fa-lock" />
                                 <input type="password" placeholder="Password..." ref="password" required />
                                 <span className="bar" />
                             </div>
-                            <div className="input-group">
+                            <div className="inputan">
                                 {this.renderBtnOrLoading()}
                             </div>
                             <div>

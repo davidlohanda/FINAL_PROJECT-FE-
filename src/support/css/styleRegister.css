@@ -12,7 +12,7 @@
 }
 
 
-#wrapper{
+#bungkus{
     position: absolute;
     top: 43vh;
     width: 90%;
@@ -24,7 +24,7 @@
     transform: scale(0.7)
 }
 
-.form-container{
+.tempat-form{
     width: 100%;
     max-width: 40rem;
     background-color: #fff;
@@ -38,7 +38,7 @@
     box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
 }
 
-.form-container:before{
+.tempat-form:before{
     content:'';
     position: absolute;
     top: 0;
@@ -51,7 +51,7 @@
     z-index: -1
 }
 
-.form-heading{
+.form-title{
     color: #fff;
     font-size: 2.5rem;
     position: absolute;
@@ -69,7 +69,7 @@ form{
     box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
 }
 
-.input-group{
+.inputan{
     width: 90%;
     margin: 0 auto;
     position: relative;
@@ -77,7 +77,7 @@ form{
     align-items: baseline;
 }
 
-.input-group input{
+.inputan input{
     position: relative;
     width: 80%;
     padding: 1rem 0;
@@ -88,13 +88,13 @@ form{
     color: #5f0a87;
 }
 
-.input-group > i{
+.inputan > i{
     font-size: 2rem;
     margin-right: 1rem;
     color: #5f0a87;
 }
 
-.input-group .bar{
+.inputan .bar{
     position: absolute;
     left: 0;
     bottom: 0; 
@@ -103,7 +103,7 @@ form{
     height: 1px;
 }
 
-.input-group .bar::before{
+.inputan .bar::before{
     content: '';
     position: absolute;
     background-color: #5f0a87;
@@ -112,11 +112,11 @@ form{
     transition: width 650ms;
 }
 
-.input-group input:focus + .bar::before{
+.inputan input:focus + .bar::before{
     width: 100%
 }
 
-.input-group button{
+.inputan button{
     margin: 3rem auto;
     padding: 1rem 5rem;
     background: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
@@ -127,8 +127,8 @@ form{
     border-radius: 3rem;
 }
 
-.input-group button:focus,
-.input-group button:hover{
+.inputan button:focus,
+.inputan button:hover{
     background : linear-gradient(326deg, #5f0a87  0%, #a4508b 74%)
 }
 
@@ -149,15 +149,14 @@ form{
     padding-bottom: 2px;
     border-bottom: 2px solid #5f0a87;
 }
-Link{
-    text-decoration: none;
-}
+
+
 @media screen and (max-width: 700px){
-    .form-container::before{
+    .tempat-form::before{
         height: 10rem;
     }
 
-    .form-heading{
+    .form-headingg{
         left: 50%;
         transform: translateX(-50%)
     }

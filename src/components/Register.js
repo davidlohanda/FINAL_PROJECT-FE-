@@ -26,6 +26,7 @@ class Register extends React.Component{
             this.setState({error:`Password didn't macth`})
         }else{
             this.props.onRegister(username,email,password)
+            this.setState({error:'Thankyou for register, check your email to verify your accout'})
         }
 
         this.refs.username.value=''
@@ -53,9 +54,16 @@ class Register extends React.Component{
                         {this.props.error}
                     </div>
         }else if(this.state.error!==''){
-            return <div class="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
+            if(this.state.error==='Thankyou for register, check your email to verify your accout'){
+                return <div className="alert alert-success mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
                         {this.state.error}
                     </div>
+            }else{
+                return <div className="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
+                        {this.state.error}
+                    </div>
+            }
+            
         }
     }
     
@@ -66,31 +74,31 @@ class Register extends React.Component{
         }
         return(
             <div className="main">
-                <div id="wrapper">
-                    <div className="form-container">
-                        <span className="form-heading">Sign Up</span>
+                <div id="bungkus">
+                    <div className="tempat-form">
+                        <span className="form-title">Sign Up</span>
                         <form>
-                            <div className="input-group">
+                            <div className="inputan">
                                 <i className="fas fa-user" />
                                 <input type="text" placeholder="Username..."  ref="username" required />
                                 <span className="bar" />
                             </div>
-                            <div className="input-group">
+                            <div className="inputan">
                                 <i className="fas fa-envelope" />
                                 <input type="email" placeholder="Email..."  ref="email" required />
                                 <span className="bar" />
                             </div>
-                                <div className="input-group">
+                                <div className="inputan">
                                 <i className="fas fa-lock" />
                                 <input type="password" placeholder="Password..." ref="password" required />
                                 <span className="bar" />
                             </div>
-                                <div className="input-group">
+                                <div className="inputan">
                                 <i className="fas fa-lock" />
                                 <input type="password" placeholder="Confirm password..." ref="confirmPassword" required />
                                 <span className="bar" />
                             </div>
-                            <div className="input-group">
+                            <div className="inputan">
                                 {this.renderBtnOrLoading()}
                             </div>
                             <div>

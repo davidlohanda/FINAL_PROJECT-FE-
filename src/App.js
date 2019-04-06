@@ -8,6 +8,7 @@ import Main from './components/Auction/Main'
 import Cookie from 'universal-cookie'
 import {keepLogin} from './1.actions'
 import {connect} from 'react-redux'
+import CreateAuction from './components/Auction/CreateAuction';
 
 const cookie = new Cookie()
 
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path='/' component={Main} exact/>
           <Route path="/login" component={Login} exact/>
           <Route path="/register" component={Register} exact/>
+          <Route path="/createauction" component={CreateAuction} exact/>
       </div>
     );
   }

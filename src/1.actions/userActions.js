@@ -1,21 +1,27 @@
 import axios from 'axios'
 
+
 // =====================LOGIN=============================
 export const onLogin=(username,password)=>{
     return(dispatch)=>{
         dispatch({
             type:'LOADING'
         })
-        axios.get('http://localhost:2000/users',{params:{username,password}})
+        axios.get('http://localhost:2000/userLogin',{params:{username,password}})
         .then((res)=>{
-            if(res.data.length > 0){
-                dispatch({
-                    type:'LOGIN_SUCCESS',
-                    payload:username
-                })
-            }else{
+            console.log(res.data)
+            if(res.data.length === 0){
                 dispatch({
                     type:'USER_NOT_FOUND'
+                })
+            }else if(res.data[0].verified==='true'){
+                dispatch({
+                    type:'LOGIN_SUCCESS',
+                    payload:res.data[0].username
+                })
+            }else if(res.data[0].verified==='false'){
+                dispatch({
+                    type:'USER_NOT_VERIFIED'
                 })
             }
         })
@@ -29,7 +35,7 @@ export const onLogin=(username,password)=>{
 
 export const keepLogin=(cookie)=>{
     return(dispatch)=>{
-        axios.get('http://localhost:2000/users',{params:{username : cookie}})
+        axios.get('http://localhost:2000/userKeepLogin',{params:{username : cookie}})
         .then((res)=>{
             if(res.data.length > 0){
                 dispatch({
@@ -56,21 +62,17 @@ export const onRegister=(username,email,password)=>{
             type:'LOADING'
         })
 
-        axios.get('http://localhost:2000/users?username='+username)
+        axios.post('http://localhost:2000/userRegister',{username,email,password})
         .then((res)=>{
-            if(res.data.length>0){
+            if(res.data==='Registration Success'){
+                dispatch({
+                    type:'LOGIN_SUCCESS',
+                    payload:res.data[0].username
+                })
+            }else if(res.data==='Username not available'){
                 dispatch({
                     type:'USERNAME_NOT_AVAILABLE'
                 })
-            }else{
-                axios.post('http://localhost:2000/users',{username,email,password})
-                .then((res)=>{
-                    dispatch({
-                        type:'LOGIN_SUCCESS',
-                        payload:username
-                    })
-                })
-                .catch((err)=>console.log(err))
             }
         })
         .catch((err)=>{
