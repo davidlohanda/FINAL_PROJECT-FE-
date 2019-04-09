@@ -50,7 +50,7 @@ class Register extends React.Component{
 
     renderErrorMessage=()=>{
         if(this.props.error !== ''){
-            return <div class="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
+            return <div className="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
                         {this.props.error}
                     </div>
         }else if(this.state.error!==''){

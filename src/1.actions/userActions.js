@@ -7,7 +7,7 @@ export const onLogin=(username,password)=>{
         dispatch({
             type:'LOADING'
         })
-        axios.get('http://localhost:2000/userLogin',{params:{username,password}})
+        axios.get('http://localhost:2000/login/userLogin',{params:{username,password}})
         .then((res)=>{
             console.log(res.data)
             if(res.data.length === 0){
@@ -35,7 +35,7 @@ export const onLogin=(username,password)=>{
 
 export const keepLogin=(cookie)=>{
     return(dispatch)=>{
-        axios.get('http://localhost:2000/userKeepLogin',{params:{username : cookie}})
+        axios.get('http://localhost:2000/login/userKeepLogin',{params:{username : cookie}})
         .then((res)=>{
             if(res.data.length > 0){
                 dispatch({
@@ -62,8 +62,9 @@ export const onRegister=(username,email,password)=>{
             type:'LOADING'
         })
 
-        axios.post('http://localhost:2000/userRegister',{username,email,password})
+        axios.post('http://localhost:2000/auth/userRegister',{username,email,password})
         .then((res)=>{
+            console.log(res.data)
             if(res.data==='Registration Success'){
                 dispatch({
                     type:'LOGIN_SUCCESS',

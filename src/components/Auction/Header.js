@@ -17,7 +17,7 @@ import logo from '../../img/Gotcha.png'
 import {connect} from 'react-redux'
 import {resetUser} from '../../1.actions'
 import Cookie from 'universal-cookie'
-import {Redirect} from 'react-router-dom'
+import {Redirect,Link} from 'react-router-dom'
 
 const cookie = new Cookie()
 
@@ -54,16 +54,13 @@ class Header extends React.Component{
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink href="">About</NavLink>
+                    <Link to="/myauction"><NavLink>My Auction </NavLink></Link>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="">Product</NavLink>
+                    <Link to="/createauction"><NavLink>Create Auction</NavLink></Link>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="">Help</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="">Contact Us</NavLink>
+                    <NavLink href="">Cart</NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink href="" onClick={this.btnSignOut}>Sign Out</NavLink>

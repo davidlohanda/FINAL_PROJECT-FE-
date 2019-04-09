@@ -15,7 +15,7 @@ class CreateAuction extends React.Component{
 
     getOwnerId=()=>{
       console.log(this.props.username)
-      axios.get('http://localhost:2000/getUserByUsername', {params:{username : this.props.username}})
+      axios.get('http://localhost:2000/login/getUserByUsername', {params:{username : this.props.username}})
       .then((res)=>{
         console.log(res.data[0].id)
         this.setState({owner : res.data[0].id})
@@ -25,21 +25,18 @@ class CreateAuction extends React.Component{
     }
 
     btnCreateAuction=()=>{
-      var endDate =  Date.parse(this.refs.endDate.value)
-      var now = new Date().getTime()
-      var duration = endDate - now
       var data = {
         owner : this.props.username,
         product_name : this.refs.product_name.value,
         product_price : this.refs.product_price.value,
         add_price : this.refs.addPrice.value,
         product_desc : this.refs.product_desc.value,
-        duration : duration
+        duration : this.refs.endDate.value
       }
       var fd = new FormData()
       fd.append('img' , this.state.imageFile)
       fd.append('product' , JSON.stringify(data))
-      axios.post('http://localhost:2000/createAuction' , fd)
+      axios.post('http://localhost:2000/auction/createAuction' , fd)
       .then((res)=>{
         if(res.data.error){
           this.setState({error : res.data.msg})
