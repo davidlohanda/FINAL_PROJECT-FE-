@@ -57,8 +57,9 @@ class MyAuction extends React.Component{
             add_price : this.refs.add_priceEdit.value ? this.refs.add_priceEdit.value : this.state.dataEdit.add_price,
             product_desc : this.refs.product_descEdit.value ? this.refs.product_descEdit.value : this.state.dataEdit.product_desc
         }
-
+        console.log(this.state.dataEdit.product_image)
         if(this.state.selectedFileImageEdit){
+            console.log(this.state.dataEdit.product_image)
             var fd = new FormData()
             fd.append('editImg' , this.state.selectedFileImageEdit)
             fd.append('editAuction' , JSON.stringify(data))
@@ -71,6 +72,7 @@ class MyAuction extends React.Component{
             })
             .catch((err) => console.log(err))
         }else{
+            console.log(this.state.dataEdit.product_image)
             axios.put(`http://localhost:2000/auction/editCreateAuction?id=${this.state.dataEdit.id}`, data)
             .then((res) => {
                 alert(res.data)
@@ -82,6 +84,7 @@ class MyAuction extends React.Component{
     }
     
     onBtnDeleteClick = (val) => {
+        console.log(val.product_image)
         axios.delete(`http://localhost:2000/auction/deleteCreateAuction?id=${val.id}&imageBefore=${val.product_image}`)
         .then((res)=>{
             alert(res.data)

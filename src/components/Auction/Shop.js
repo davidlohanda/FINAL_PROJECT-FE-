@@ -2,7 +2,7 @@
 import React from 'react'
 import axios from 'axios'
 import CountDown from 'react-countdown-now'
-
+import {connect} from 'react-redux'
 
 
 
@@ -36,6 +36,28 @@ class Shop extends React.Component{
         }
       };
 
+    
+    onBtnBidClick = (val) => {
+        axios.get(`http://localhost:2000/login/getUserByUsername?username=${this.props.username}`)
+        .then((res) => {
+            console.log(res.data)
+            axios.put(`http://localhost:2000/bidder/makeABid/${val.id}`, {
+                new_product_price : val.product_price + val.add_price,
+                product_id : val.id,
+                user_id :res.data[0].id
+            })
+            .then((res1)=>{
+                alert(res1.data)
+                this.getAllAuction()
+            })
+            .catch((err) => console.log(err))
+        })
+        .catch((err) => console.log(err))
+        
+        
+
+    }
+
     renderSellAuction = () => {
         var jsx = this.state.sellAuction.map((val) => {
             
@@ -48,9 +70,9 @@ class Shop extends React.Component{
                         <img src={'http://localhost:2000/'+val.product_image} className="card-img-top" alt="..." />
                         <div className="card-body">
                             <h5 className="card-title">{val.product_name}</h5>
-                            <p className="card-text">Rp.{val.product_price}</p>
+                            <p className="card-text">Current Price : Rp.{val.product_price}</p>
                             <p><CountDown  date={Date.now() + distance} renderer={this.renderer}/></p>
-                        <a href="/" className="btn btn-primary">Bid</a>
+                        <button style={{fontSize:'18px'}} className="btn btn-primary" onClick={()=>this.onBtnBidClick(val)}>Bid for ${val.product_price+val.add_price}</button>
                         </div>
                     </div>
             )
@@ -67,4 +89,10 @@ class Shop extends React.Component{
     }
 }
 
-export default Shop
+const mapStateToProps = (state) => {
+    return {
+        username : state.user.username
+    }
+}
+
+export default connect(mapStateToProps)(Shop)
