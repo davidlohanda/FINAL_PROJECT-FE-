@@ -65,12 +65,12 @@ export const onRegister=(username,email,password)=>{
         axios.post('http://localhost:2000/auth/userRegister',{username,email,password})
         .then((res)=>{
             console.log(res.data)
-            if(res.data==='Registration Success'){
+            if(res.data ==='Registration Success'){
                 dispatch({
                     type:'LOGIN_SUCCESS',
                     payload:res.data[0].username
                 })
-            }else if(res.data==='Username not available'){
+            }else if(res.data ==='Username not available'){
                 dispatch({
                     type:'USERNAME_NOT_AVAILABLE'
                 })

@@ -1,0 +1,53 @@
+.decortop{
+    height: 5vh;
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 2px;
+}
+.decorbottom{
+    border-bottom: 1px solid black;
+    height: 5vh;
+}
+
+.decor-1{
+    border-right: 1px solid black;
+    text-align: center;
+}
+.decor-1 p{
+    font-size: 25px;
+    padding-top: 5px;
+}
+.canvas{
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid black;
+    height: 90vh;
+    font-size: 15px;
+}
+.canvas-1{
+    text-align: center;
+    text-transform: uppercase;
+}
+.canvas-2{
+    text-align: center;
+    text-transform: uppercase;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.canvas-3{
+    text-align: center; 
+    text-transform: uppercase;
+}
+.canvas-3 .how-title{
+    margin-top: 30vh;
+}
+.canvas-3 .how p{
+    padding: 10px 0;
+}
+.canvas-1 p,.canvas-2 p{
+    margin-top: 40vh;
+}
+.canvas-1 p:hover,.canvas-2 p:hover{
+    color: #192a56;
+    cursor: pointer;
+}

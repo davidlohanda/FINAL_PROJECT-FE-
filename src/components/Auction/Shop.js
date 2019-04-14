@@ -32,7 +32,7 @@ class Shop extends React.Component{
           // Render a completed state
         } else {
           // Render a countdown
-          return <span style={{color:'red'}}>{days}d:{hours}h:{minutes}m:{seconds}s</span>;
+          return <span style={{color:'#487eb0', fontWeight:600}}>{days}d:{hours}h:{minutes}m:{seconds}s</span>;
         }
       };
 
@@ -66,13 +66,13 @@ class Shop extends React.Component{
             var distance = endDate - now
             
             return (
-                     <div className="card" style={{width: '18rem'}}>
+                     <div className="card mt-4" style={{width: '12vw',fontSize:'15px', fontFamily:'Arial, Helvetica, sans-serif'}}>
                         <img src={'http://localhost:2000/'+val.product_image} className="card-img-top" alt="..." />
                         <div className="card-body">
-                            <h5 className="card-title">{val.product_name}</h5>
+                            <h5 className="card-title" style={{fontSize:'17px', fontWeight:700}}>{val.product_name}</h5>
                             <p className="card-text">Current Price : Rp.{val.product_price}</p>
                             <p><CountDown  date={Date.now() + distance} renderer={this.renderer}/></p>
-                        <button style={{fontSize:'18px'}} className="btn btn-primary" onClick={()=>this.onBtnBidClick(val)}>Bid for ${val.product_price+val.add_price}</button>
+                        <button style={{backgroundColor:'#000',color:'#fff'}} className="btn" onClick={()=>this.onBtnBidClick(val)}>Bid for ${val.product_price+val.add_price}</button>
                         </div>
                     </div>
             )

@@ -1,45 +1,39 @@
 import React from 'react'
+import '../support/css/main.css'
 import {Link} from 'react-router-dom'
-import '../support/css/styleHome.css'
-import man from '../img/man_PNG6513.png'
-import logo from '../img/Gotcha.png'
-
 
 class Home extends React.Component{
     render(){
         return(
-            <div className="main">
-                <div className="tone-1">
-                    <div className="text-home">
-                        <img src={logo} className="animated heartBeat" alt=""/>
-                        <p className="animated zoomIn delay-1s">Bidders Are Winners</p>
-                        <div className="btn animated fadeInUp delay-2s">
-                            <Link to="/login" style={{textDecoration:'none'}}><p>Login</p></Link>
-                            <Link to="/register" style={{textDecoration:'none'}}><p>Register</p></Link>
+            <div>
+                <div className="decortop">
+                    <div className="decor-1">
+                        <p className="animated fadeInDown">GOTCHA</p>
+                    </div>
+                </div>
+                <div className="canvas">
+                    <div className="canvas-1">
+                        <Link to="/login" style={{color:'black'}}><p className="animated fadeInUp delay-1s">Login</p></Link>
+                    </div>
+                    <div className="canvas-2">
+                        <Link to="/register" style={{color:'black'}}><p className="animated fadeInUp delay-2s">Register</p></Link>
+                    </div>
+                    <div className="canvas-3 animated fadeInUp delay-3s">
+                        <p  className="how-title">How it work?</p>
+                        <div className="how">
+                            <p><i className="fas fa-home" /> Register</p>
+                            <p><i className="fas fa-money-bill-wave" /> Buy or Bid</p>
+                            <p><i className="fas fa-gavel" /> Submit a Bid</p>
+                            <p><i className="far fa-laugh-beam" /> Win</p>
                         </div>
                     </div>
                 </div>
-                <div className="tone-2">
-                    <img className="animated bounceIn delay-2s" src={man} alt=""/>
-                    <div className="infos animated fadeInUp delay-3s">
-                        <div className="infos-title animated fadeInUp delay-3s">
-                            <h1>How it work?</h1>
-                        </div>
-                        <div className="info1 animated fadeInUp delay-4s">
-                            <h3><i className="fas fa-home" /> Register</h3>
-                        </div>
-                        <div className="info1 animated fadeInUp delay-4s">
-                            <h3><i className="fas fa-money-bill-wave" /> Buy or Bid</h3>
-                        </div>
-                        <div className="info1 animated fadeInUp delay-4s">
-                            <h3><i className="fas fa-gavel" /> Submit a Bid</h3>
-                        </div>
-                        <div className="info1 animated fadeInUp delay-4s">
-                            <h3><i className="far fa-laugh-beam" /> Win</h3>
-                        </div>
+                <div className="decorbottom">
+                    <div className="decor-1">
+
                     </div>
                 </div>
-      </div>
+            </div>
         )
     }
 }

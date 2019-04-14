@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import cookie from 'universal-cookie'
+import {Link} from 'react-router-dom'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import '../../support/css/myauction.css'
 
 
 
@@ -93,59 +95,102 @@ class MyAuction extends React.Component{
     }
 
     render(){
-        return(
-            <div>
-                <h1>My Auction Product</h1>
-                <table className='table mt-5'>
-                <tr>
-                    <td>NO</td>
-                    <td>NAMA</td>
-                    <td>HARGA</td>
-                    <td>IMAGE</td>
-                    <td>EDIT</td>
-                    <td>DELETE</td>
-                </tr>
-                {this.renderJsx()}
-                </table>
-
-                {/* =============MODAL================= */}
-                <div>
-                    <Modal isOpen={this.state.modal} toggle={()=>{this.setState({modal : false})}} className={this.props.className}>
-                    <ModalHeader toggle={()=>{this.setState({modal : false})}}>Edit - {this.state.dataEdit.product_name}</ModalHeader>
-                    <ModalBody>
-                    <div className='row'> 
-                        <div className='col-md-3'>
-                            <img src={'http://localhost:2000/' + this.state.dataEdit.product_image} width='100%' alt='broken' />
-                            <input type='file' onChange={this.onChangeHandlerEdit} style={{display:'none'}} ref='inputEdit' />
-                            <input type='button' value={this.valueHandlerEdit()} className='btn btn-primary' 
-                            onClick={ () =>this.refs.inputEdit.click()} style={{fontSize:'14px', marginTop:'3px',width:'100%'}} />
+        if(this.state.myAuction.length === 0){
+            return <div>
+                         <div className="top">
+                            <div className="top-1"><Link to="/" style={{color:'#000'}}><i class="fas fa-arrow-left"></i></Link></div>
+                            <div className="top-2">My Auction</div>
+                            <div className="top-3"></div>
                         </div>
-                        <div className='col-md-9'>
-                            <label>Product Name</label> 
-                            <input type='text' className='form-control' 
-                            defaultValue={this.state.dataEdit.product_name} ref='product_nameEdit' />
-                            
-                            <label className="mt-3">Product Price</label>
-                            <input type='number' className='form-control' 
-                            defaultValue={this.state.dataEdit.product_price} ref='product_priceEdit' />
-                            
-                            <label className="mt-3">Product Add Price</label>
-                            <input type='number' className='form-control' 
-                            defaultValue={this.state.dataEdit.add_price} ref='add_priceEdit' />
-
-                            <label className="mt-3">Product Description</label>
-                            <textarea className="form-control" defaultValue={this.state.dataEdit.product_desc} id="productDesc" rows={3} ref="product_descEdit" required/>
+                        <div className="mid">
+                            <div className="mid-1"></div>
+                            <div className="mid-2" style={{fontFamily:' Arial, Helvetica, sans-serif'}}>
+                                <p style={{textAlign:'center', marginTop:'40vh', textDecoration:'underline'}}>You haven't make any auction yet</p>
+                                <Link style={{color:'#000'}} to="/createauction"><p style={{textAlign:'center', marginTop:'5vh', textDecoration:'underline'}}>Create some?</p></Link>
+                            </div>
+                            <div className="mid-3"></div>
+                        </div>
+                        <div className="bottom">
+                            <div className="bottom-1"></div>
+                            <div className="bottom-2"></div>
+                            <div className="bottom-3"></div> 
+                        </div>
+                   </div>
+        }else{
+            return(
+                <div>
+                    <div>
+                        <div className="top">
+                            <div className="top-1"><Link to="/" style={{color:'#000'}}><i class="fas fa-arrow-left"></i></Link></div>
+                            <div className="top-2">My Auction</div>
+                            <div className="top-3"></div>
+                        </div>
+                        <div className="mid">
+                            <div className="mid-1"></div>
+                            <div className="mid-2 text-center">
+                                <div className="container" style={{fontFamily:' Arial, Helvetica, sans-serif',fontSize:'15px'}}>
+                                <table className="mt-5 mb-5 table">
+                                <tr>
+                                    <td>NO</td>
+                                    <td>NAMA</td>
+                                    <td>HARGA</td>
+                                    <td>IMAGE</td>
+                                    <td>EDIT</td>
+                                    <td>DELETE</td>
+                                </tr>
+                                {this.renderJsx()}
+                                </table>
+                                </div>
+                            </div>
+                            <div className="mid-3"></div>
+                        </div>
+                        <div className="bottom">
+                            <div className="bottom-1"></div>
+                            <div className="bottom-2"></div>
+                            <div className="bottom-3"></div>
                         </div>
                     </div>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.onBtnSaveClick} style={{fontSize:'18px', marginTop:'-2px'}}>Save</Button>{' '}
-                        <Button color="secondary" onClick={()=>{this.setState({modal : false})}} style={{fontSize:'18px', marginTop:'-2px'}}>Cancel</Button>
-                    </ModalFooter>
-                    </Modal>
+    
+                    {/* =============MODAL================= */}
+                    <div>
+                        <Modal isOpen={this.state.modal} toggle={()=>{this.setState({modal : false})}} className={this.props.className}>
+                        <ModalHeader toggle={()=>{this.setState({modal : false})}}>Edit - {this.state.dataEdit.product_name}</ModalHeader>
+                        <ModalBody>
+                        <div className='row'> 
+                            <div className='col-md-3'>
+                                <img src={'http://localhost:2000/' + this.state.dataEdit.product_image} width='100%' alt='broken' />
+                                <input type='file' onChange={this.onChangeHandlerEdit} style={{display:'none'}} ref='inputEdit' />
+                                <input type='button' value={this.valueHandlerEdit()} className='btn btn-primary' 
+                                onClick={ () =>this.refs.inputEdit.click()} style={{fontSize:'14px', marginTop:'3px',width:'100%'}} />
+                            </div>
+                            <div className='col-md-9'>
+                                <label>Product Name</label> 
+                                <input type='text' className='form-control' 
+                                defaultValue={this.state.dataEdit.product_name} ref='product_nameEdit' />
+                                
+                                <label className="mt-3">Product Price</label>
+                                <input type='number' className='form-control' 
+                                defaultValue={this.state.dataEdit.product_price} ref='product_priceEdit' />
+                                
+                                <label className="mt-3">Product Add Price</label>
+                                <input type='number' className='form-control' 
+                                defaultValue={this.state.dataEdit.add_price} ref='add_priceEdit' />
+    
+                                <label className="mt-3">Product Description</label>
+                                <textarea className="form-control" defaultValue={this.state.dataEdit.product_desc} id="productDesc" rows={3} ref="product_descEdit" required/>
+                            </div>
+                        </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.onBtnSaveClick} style={{fontSize:'18px', marginTop:'-2px'}}>Save</Button>{' '}
+                            <Button color="secondary" onClick={()=>{this.setState({modal : false})}} style={{fontSize:'18px', marginTop:'-2px'}}>Cancel</Button>
+                        </ModalFooter>
+                        </Modal>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        
     }
 }
 

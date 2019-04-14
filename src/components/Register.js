@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link,Redirect} from 'react-router-dom'
-import '../support/css/styleRegister.css'
+import '../support/css/register.css'
 import Loader from 'react-loader-spinner'
 import {connect} from 'react-redux'
 import {onRegister} from '../1.actions'
@@ -73,7 +73,7 @@ class Register extends React.Component{
             return <Redirect to="/"/>
         }
         return(
-            <div className="main">
+            <div className="main animated fadeIn">
                 <div id="bungkus">
                     <div className="tempat-form">
                         <span className="form-title">Sign Up</span>
@@ -93,7 +93,7 @@ class Register extends React.Component{
                                 <input type="password" placeholder="Password..." ref="password" required />
                                 <span className="bar" />
                             </div>
-                                <div className="inputan">
+                            <div className="inputan">
                                 <i className="fas fa-lock" />
                                 <input type="password" placeholder="Confirm password..." ref="confirmPassword" required />
                                 <span className="bar" />

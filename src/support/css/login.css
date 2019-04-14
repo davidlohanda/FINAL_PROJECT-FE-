@@ -6,9 +6,7 @@
 
 .main{
     font-size: 10px;
-    font-family: 'Roboto', sans-serif;
-    background: url(https://images.pexels.com/photos/40140/achievement-bar-business-chart-40140.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat;
-    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -31,42 +29,26 @@
     position: relative;
     padding: 10rem 0;
     box-shadow: 0 1px 1.5rem rgba(0,0,0,.1);
-    border-radius: 1rem;
     z-index : 1;
-    -webkit-box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
-    box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
+    border: 1px solid black;
 }
 
-.tempat-form:before{
-    content:'';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30rem;
-    background: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
-    border-bottom-right-radius: 100%;
-    border-bottom-left-radius: 100%;
-    z-index: -1
-}
+
 
 .form-title{
-    color: #fff;
+    color: #000;
     font-size: 2.5rem;
     position: absolute;
     top: 3.5rem;
     left: 10rem;
+    font-weight: 700;
 }
 
 form{
     transform: translateX(10rem);
     background-color: #fff;
     padding: 2rem 0;
-    border-radius: 1rem;
-    -webkit-box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
-    box-shadow: 0px 2px 12px 6px rgba(0,0,0,0.75);
+    border: 1px solid black;
 }
 
 .inputan{
@@ -85,13 +67,13 @@ form{
     border: none;
     outline: none;
     font-size: 1.8rem;
-    color: #5f0a87;
+    color: #000;
 }
 
 .inputan > i{
     font-size: 2rem;
     margin-right: 1rem;
-    color: #5f0a87;
+    color: #000;
 }
 
 .inputan .bar{
@@ -106,7 +88,7 @@ form{
 .inputan .bar::before{
     content: '';
     position: absolute;
-    background-color: #5f0a87;
+    background-color: #000;
     width: 0;
     height: 2px;
     transition: width 650ms;
@@ -119,7 +101,7 @@ form{
 .inputan button{
     margin: 3rem auto;
     padding: 1rem 5rem;
-    background: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
+    background: #000;
     border: none;
     color: #fff;
     font-size: 2.5rem;
@@ -129,7 +111,7 @@ form{
 
 .inputan button:focus,
 .inputan button:hover{
-    background : linear-gradient(326deg, #5f0a87  0%, #a4508b 74%)
+    background : #192a56;
 }
 
 .switch-login{
@@ -142,28 +124,24 @@ form{
 }
 
 .switch-login span{
-    color: #5f0a87;
+    color: #000;
 }
 
 .switch-login span:hover{
+    color: #192a56;
     padding-bottom: 2px;
-    border-bottom: 2px solid #5f0a87;
+    border-bottom: 2px solid #192a56;
 }
 
 
 @media screen and (max-width: 700px){
-    .tempat-form::before{
-        height: 10rem;
-    }
-
     .form-title{
         left: 50%;
         transform: translateX(-50%)
     }
 
     form{
-        border-radius: initial;
+        border : none;
         transform: initial;
-        box-shadow: none;
     }
 }

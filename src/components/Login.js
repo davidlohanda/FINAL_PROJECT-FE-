@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link,Redirect} from 'react-router-dom'
-import '../support/css/styleLogin.css'
+import '../support/css/login.css'
 import {connect} from 'react-redux'
 import {onLogin} from '../1.actions'
 import Loader from 'react-loader-spinner'
@@ -49,7 +49,7 @@ class Login extends React.Component{
             return <Redirect to="/" />
         }
         return(
-            <div className="main">
+            <div className="main animated fadeIn">
                 <div id="bungkus">
                     <div className="tempat-form">
                         <span className="form-title">Login</span>

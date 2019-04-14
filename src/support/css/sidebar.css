@@ -1,0 +1,91 @@
+.header{
+    height: 50px;
+    background-color: #fff;
+    padding: 0 20px;
+    border-bottom: 1px solid #000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.logo{
+    font-family: 'Staatliches', cursive;
+    font-size: 25px;
+    line-height: 50px;
+    text-transform : uppercase;
+    color: #000;
+    float: left;
+    letter-spacing: 2px;
+}
+.welcome{
+    font-size: 25px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+.menu{
+    position: fixed;
+    width: 25%;
+    height: 100vh;
+    background: #fff;
+    right: -100%;
+    top:0;
+    text-align: center;
+    padding: 120px 0;
+    transition: 2s;
+    border: 1px solid black;
+    z-index: 999;
+}
+.menu span{
+    cursor: pointer;
+    text-decoration: none;
+    text-transform : uppercase;
+    color: #000;
+    display: block;
+    padding: 30px 0;
+    font-weight: 600;
+}
+.show-menu-btn,.hide-menu-btn{
+    font-size: 30px;
+    cursor: pointer;
+    display : block;
+    color: #000;
+    font-weight: 600;
+}
+
+.show-menu-btn{
+    float: right;
+}
+.show-menu-btn i{
+    line-height: 50px;
+}
+.hide-menu-btn{
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+.menu a:hover,
+.show-menu-btn:hover,
+.hide-menu-btn:hover{
+    color: #2c3e50;
+    
+    text-decoration: none;
+}
+#chk{
+    position: absolute;
+    visibility: hidden;
+    z-index: -999;
+}
+#chk:checked ~ .menu{
+    right: 0;
+    transition: 1.5s;
+}
+
+@media screen and (max-width:1000px){
+    .menu{
+        width: 45%;
+        padding: 100px 0;
+        font-size: 15px;
+    }
+    .show-menu-btn,.hide-menu-btn{
+        font-size: 27px;
+    }
+}
+
+
