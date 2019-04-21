@@ -14,7 +14,7 @@
 }
 .decor-1 p{
     font-size: 25px;
-    padding-top: 5px;
+    padding-top: 1px;
 }
 .canvas{
     font-family: Arial, Helvetica, sans-serif;
@@ -41,7 +41,7 @@
 .canvas-3 .how-title{
     margin-top: 30vh;
 }
-.canvas-3 .how p{
+.canvas-3 .howTo p{
     padding: 10px 0;
 }
 .canvas-1 p,.canvas-2 p{

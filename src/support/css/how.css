@@ -1,0 +1,37 @@
+.wrap{
+    width:100vw;
+    border-top: 1px solid black;
+    border-bottom : 1px solid black;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    overflow-x: hidden;
+    
+}
+.how{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    height: 30vh;
+}
+.caption{
+    text-align: center;
+}
+.cap-title{
+    font-weight: 700;
+    margin-top: 5vh;
+    font-size: 16px
+}
+.how-title{
+    font-weight: 700;
+}
+
+
+@media screen and (max-width:1000px){
+    .how{
+        grid-template-columns: 1fr
+    }
+    .wrap{
+        border: 1px solid dotted;
+        height: 135vh;
+    }
+}

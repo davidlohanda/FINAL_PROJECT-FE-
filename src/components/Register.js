@@ -9,7 +9,7 @@ import Cookie from 'universal-cookie'
 const cookie = new Cookie()
 
 class Register extends React.Component{
-    state={error:''}
+    state={error:'', success:''}
 
     componentWillReceiveProps(newProps){
         cookie.set('userData',newProps.username,{path:'/'})
@@ -26,7 +26,7 @@ class Register extends React.Component{
             this.setState({error:`Password didn't macth`})
         }else{
             this.props.onRegister(username,email,password)
-            this.setState({error:'Thankyou for register, check your email to verify your accout'})
+            this.setState({success:'Thankyou for register, check your email to verify your accout'})
         }
 
         this.refs.username.value=''
@@ -54,16 +54,13 @@ class Register extends React.Component{
                         {this.props.error}
                     </div>
         }else if(this.state.error!==''){
-            if(this.state.error==='Thankyou for register, check your email to verify your accout'){
-                return <div className="alert alert-success mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
+            return <div className="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
                         {this.state.error}
                     </div>
-            }else{
-                return <div className="alert alert-danger mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
-                        {this.state.error}
+        }else if(this.state.success!==''){
+            return <div className="alert alert-success mt-3" role="alert" style={{fontSize:'22px', textAlign:'center'}}>
+                        {this.state.success}
                     </div>
-            }
-            
         }
     }
     
@@ -119,7 +116,8 @@ const mapStateToProps=(state)=>{
     return{
         username:state.user.username,
         loading:state.user.loading,
-        error:state.user.error
+        error:state.user.error,
+        success : state.user.success
     }
 }
 

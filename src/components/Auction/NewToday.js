@@ -1,17 +1,16 @@
-//Menampilkan barang2 yang pernah dilelang oleh user
 import React from 'react'
 import axios from 'axios'
+import Sidebar from './Sidebar';
+import SearchAndCart from './SearchAndCart';
 import CountDown from 'react-countdown-now'
 import {connect} from 'react-redux'
 import {cartCount} from '../../1.actions'
 
-
-
-class Shop extends React.Component{
-    state = {sellAuction : [] , timer : [] , winner : []}
+class NewToday extends React.Component{
+    state = {todayAuction : [] , timer : [] , winner : []}
 
     componentDidMount(){
-        this.getAllAuction()
+        this.getTodayAuction()
     }
 
     getWinner = () => {
@@ -23,11 +22,11 @@ class Shop extends React.Component{
         .catch((err) => console.log(err))
     }
 
-    getAllAuction = () => {
-        axios.get('http://localhost:2000/auction/getAllCreateAuction')
+    getTodayAuction = () => {
+        axios.get(`http://localhost:2000/auction/todayAuction`)
         .then((res) => {
             console.log(res.data)
-            this.setState({sellAuction : res.data})
+            this.setState({todayAuction : res.data})
         })
         .catch((err) => console.log(err))
     }
@@ -58,7 +57,7 @@ class Shop extends React.Component{
             })
             .then((res1)=>{
                 alert(res1.data)
-                this.getAllAuction()
+                this.getTodayAuction()
             })
             .catch((err) => console.log(err))
         })
@@ -101,7 +100,7 @@ class Shop extends React.Component{
     }
 
     renderSellAuction = () => {
-        var jsx = this.state.sellAuction.map((val) => {
+        var jsx = this.state.todayAuction.map((val) => {
             
             var endDate =  Date.parse(val.duration)
             var now = new Date().getTime()
@@ -124,17 +123,29 @@ class Shop extends React.Component{
     }
 
     render(){
-        if(this.state.sellAuction.length === 0){
+        if(this.state.todayAuction.length === 0) {
             return(
-                <div className="mt-5 row justify-content-center">
-                    <p className="mt-5" style={{textDecoration:'underline'}}>No auction yet</p>
+                <div>
+                    <Sidebar/>
+                    <div className="mt-5">
+                        <SearchAndCart/>
+                    </div>
+                    <div className="mt-5 row justify-content-center">
+                        <p className="mt-5" style={{textDecoration:'underline'}}>No new auction for today</p>
+                    </div>
                 </div>
             )
         }else{
             return(
-                <div className="mt-5 row justify-content-center">
-                    {this.renderSellAuction()}
+                <div>
+                    <Sidebar/>
+                    <div className="mt-5">
+                        <SearchAndCart/>
+                    </div>
+                    <div className="mt-5 row justify-content-center">
+                        {this.renderSellAuction()}
                     
+                    </div>
                 </div>
             )
         }
@@ -148,4 +159,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{cartCount})(Shop)
+export default connect(mapStateToProps,{cartCount})(NewToday)

@@ -1,17 +1,17 @@
-//Menampilkan barang2 yang pernah dilelang oleh user
 import React from 'react'
 import axios from 'axios'
+import Sidebar from './Sidebar';
+import SearchAndCart from './SearchAndCart';
 import CountDown from 'react-countdown-now'
 import {connect} from 'react-redux'
 import {cartCount} from '../../1.actions'
 
-
-
-class Shop extends React.Component{
+class ProductCategoryList extends React.Component{
     state = {sellAuction : [] , timer : [] , winner : []}
 
     componentDidMount(){
-        this.getAllAuction()
+        this.getAuctionByCategory()
+        console.log(this.props.location.search)
     }
 
     getWinner = () => {
@@ -23,8 +23,8 @@ class Shop extends React.Component{
         .catch((err) => console.log(err))
     }
 
-    getAllAuction = () => {
-        axios.get('http://localhost:2000/auction/getAllCreateAuction')
+    getAuctionByCategory = () => {
+        axios.get(`http://localhost:2000/auction/getCreateAuctionByCategory?category=${this.props.match.params.category}`)
         .then((res) => {
             console.log(res.data)
             this.setState({sellAuction : res.data})
@@ -58,7 +58,7 @@ class Shop extends React.Component{
             })
             .then((res1)=>{
                 alert(res1.data)
-                this.getAllAuction()
+                this.getAuctionByCategory()
             })
             .catch((err) => console.log(err))
         })
@@ -126,15 +126,27 @@ class Shop extends React.Component{
     render(){
         if(this.state.sellAuction.length === 0){
             return(
-                <div className="mt-5 row justify-content-center">
-                    <p className="mt-5" style={{textDecoration:'underline'}}>No auction yet</p>
+                <div>
+                    <Sidebar/>
+                    <div className="mt-5">
+                        <SearchAndCart/>
+                    </div>
+                    <div className="mt-5 row justify-content-center">
+                        <p className="mt-5" style={{textDecoration:'underline'}}>No auction for this category yet</p>
+                    </div>
                 </div>
             )
         }else{
             return(
-                <div className="mt-5 row justify-content-center">
-                    {this.renderSellAuction()}
+                <div>
+                    <Sidebar/>
+                    <div className="mt-5">
+                        <SearchAndCart/>
+                    </div>
+                    <div className="mt-5 row justify-content-center">
+                        {this.renderSellAuction()}
                     
+                    </div>
                 </div>
             )
         }
@@ -148,4 +160,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{cartCount})(Shop)
+export default connect(mapStateToProps,{cartCount})(ProductCategoryList)

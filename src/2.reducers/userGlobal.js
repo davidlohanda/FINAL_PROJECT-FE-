@@ -1,10 +1,10 @@
-const INITIAL_STATE = {id: 0 ,username : '', password : '', error : '', loading : false}
+const INITIAL_STATE = {id: 0 ,username : '', password : '', error : '', loading : false, success : ''}
 
 export default (state=INITIAL_STATE, action)=>{
     if(action.type==='LOADING'){
         return {...INITIAL_STATE, loading:true}
     }else if(action.type==='LOGIN_SUCCESS'){
-        return {...INITIAL_STATE, username:action.payload}
+        return {...INITIAL_STATE, username:action.payload.username , role:action.payload.role}
     }else if(action.type==='USER_NOT_FOUND'){
         return {...INITIAL_STATE, error:'Incorrect username or password'}
     }else if(action.type==='USER_NOT_VERIFIED'){
@@ -15,6 +15,8 @@ export default (state=INITIAL_STATE, action)=>{
         return INITIAL_STATE
     }else if(action.type==='USERNAME_NOT_AVAILABLE'){
         return {...INITIAL_STATE, error:'Username already exist'}
+    }else if(action.type==='REGISTER_SUCCESS'){
+        return {...INITIAL_STATE, success : action.payload}
     }else{
         return state
     }

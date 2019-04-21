@@ -1,0 +1,20 @@
+.newEnd{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 15vh;
+    /* width: 100vw; */
+    display: grid;
+    border-bottom: 1px solid #000;
+    grid-template-columns: repeat(2,1fr);
+    background-color: #fff;
+}
+.newEnd2{
+    border-left: 1px solid #000;
+}
+.newEnd1 p, .newEnd2 p{
+    text-align: center;
+    margin-top: 5vh;
+    cursor: pointer;
+}
+.newEnd1 p:hover, .newEnd2 p:hover{
+    text-decoration: underline;
+}

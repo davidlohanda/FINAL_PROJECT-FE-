@@ -17,7 +17,7 @@ export const onLogin=(username,password)=>{
             }else if(res.data[0].verified==='true'){
                 dispatch({
                     type:'LOGIN_SUCCESS',
-                    payload:res.data[0].username
+                    payload: res.data[0]
                 })
             }else if(res.data[0].verified==='false'){
                 dispatch({
@@ -40,7 +40,7 @@ export const keepLogin=(cookie)=>{
             if(res.data.length > 0){
                 dispatch({
                     type:'LOGIN_SUCCESS',
-                    payload:cookie
+                    payload: res.data[0]
                 })
             }
         })
@@ -62,13 +62,13 @@ export const onRegister=(username,email,password)=>{
             type:'LOADING'
         })
 
-        axios.post('http://localhost:2000/auth/userRegister',{username,email,password})
+        axios.post('http://localhost:2000/auth/userRegister',{username,email,password, role : 'user'})
         .then((res)=>{
             console.log(res.data)
             if(res.data ==='Registration Success'){
                 dispatch({
-                    type:'LOGIN_SUCCESS',
-                    payload:res.data[0].username
+                    type:'REGISTER_SUCCESS',
+                    payload: res.data
                 })
             }else if(res.data ==='Username not available'){
                 dispatch({

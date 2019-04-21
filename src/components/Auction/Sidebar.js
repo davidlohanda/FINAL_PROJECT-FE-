@@ -18,31 +18,54 @@ class Sidebar extends React.Component{
         if(this.props.username === ""){
             return <Redirect to="/"/>
           }
-        return(
-            <div className="header fixed-top">
-                <h2 class="logo">Gotcha</h2>
-                <input type="checkbox" id="chk"/>
-                <label for="chk" class="show-menu-btn">
-                    <i className="fas fa-ellipsis-h"/>
-                </label>
-                <ul class="menu">
-                    <span className="welcome">-{this.props.username}-</span>
-                    <Link to="/myauction"><span>My Auction</span></Link>
-                    <Link to="/createauction"><span>Create Auction</span></Link>    
-                    <span>Cart</span>
-                    <span onClick={this.btnSignOut}>Sign Out</span>
-                    <label for="chk" className="hide-menu-btn">
-                        <i className="fas fa-times"/>
+        if(this.props.role === 'admin'){
+            return(
+                <div className="header fixed-top">
+                    <Link to="/"><h2 class="logo">Gotcha</h2></Link>
+                    <input type="checkbox" id="chk"/>
+                    <label for="chk" class="show-menu-btn">
+                        <i className="fas fa-ellipsis-h"/>
                     </label>
-                </ul>
-            </div>
-        )
+                    <ul class="menu">
+                        <span className="welcome">-{this.props.username} / Admin-</span>
+                        <Link to="/managecategory"><span>Manage Category</span></Link>
+                        <Link to="/manageauction"><span>Manage Auction</span></Link>
+                        <span onClick={this.btnSignOut}>Sign Out</span>
+                        <label for="chk" className="hide-menu-btn">
+                            <i className="fas fa-times"/>
+                        </label>
+                    </ul>
+                </div>
+            )    
+        }else if(this.props.role === 'user'){
+            return(
+                <div className="header fixed-top">
+                    <Link to="/"><h2 class="logo">Gotcha</h2></Link>
+                    <input type="checkbox" id="chk"/>
+                    <label for="chk" class="show-menu-btn">
+                        <i className="fas fa-ellipsis-h"/>
+                    </label>
+                    <ul class="menu">
+                        <span className="welcome">-{this.props.username}-</span>
+                        <Link to="/myauction"><span>My Auction</span></Link>
+                        <Link to="/createauction"><span>Create Auction</span></Link>    
+                        <Link to="/cart"><span>Cart</span></Link>
+                        {this.props.role === 'admin'? <Link to="/managecategory"><span>Manage Category</span></Link> : null}
+                        <span onClick={this.btnSignOut}>Sign Out</span>
+                        <label for="chk" className="hide-menu-btn">
+                            <i className="fas fa-times"/>
+                        </label>
+                    </ul>
+                </div>
+            )
+        }
     }
 }
 
 const mapStateToProps=(state)=>{
     return{
-      username:state.user.username
+      username: state.user.username,
+      role : state.user.role
     }
   }
   

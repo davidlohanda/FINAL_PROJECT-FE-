@@ -20,7 +20,7 @@ class Home extends React.Component{
                     </div>
                     <div className="canvas-3 animated fadeInUp delay-3s">
                         <p  className="how-title">How it work?</p>
-                        <div className="how">
+                        <div className="howTo">
                             <p><i className="fas fa-home" /> Register</p>
                             <p><i className="fas fa-money-bill-wave" /> Buy or Bid</p>
                             <p><i className="fas fa-gavel" /> Submit a Bid</p>

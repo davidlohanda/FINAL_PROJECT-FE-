@@ -92,6 +92,7 @@ class MyAuction extends React.Component{
             alert(res.data)
             this.getMyAuction()
         })
+        .catch((err) => console.log(err))
     }
 
     render(){
@@ -132,17 +133,20 @@ class MyAuction extends React.Component{
                                 <table className="mt-5 mb-5 table">
                                 <tr>
                                     <td>NO</td>
-                                    <td>NAMA</td>
-                                    <td>HARGA</td>
+                                    <td>NAME</td>
+                                    <td>PRICE</td>
                                     <td>IMAGE</td>
                                     <td>EDIT</td>
                                     <td>DELETE</td>
                                 </tr>
                                 {this.renderJsx()}
                                 </table>
+                                
                                 </div>
                             </div>
-                            <div className="mid-3"></div>
+                            <div className="mid-3">
+
+                            </div>
                         </div>
                         <div className="bottom">
                             <div className="bottom-1"></div>
@@ -196,7 +200,7 @@ class MyAuction extends React.Component{
 
 const mapStateToProps = (state )=> {
     return{
-      username : state.user.username
+      username : state.user.username.username
     }
 }
 

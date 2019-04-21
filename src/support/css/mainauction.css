@@ -1,20 +1,20 @@
 .content-nav{
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    height: 5vh;
-    width: 100vw;
+    height: 7vh;
+    /* width: 100vw; */
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
 }
 .content-nav-2 span{
-    margin-left: 10px;
+    margin-left: 25px;
 }
 .content-nav-2 span i{
     margin-right: 10px;
 }
 .content-nav-2 span input{
-    width: 90%;
+    width: 85%;
     height: 95%;
     padding: 0;
     margin:0;
@@ -29,8 +29,8 @@
     border-left: 1px solid black;
 }
 .content-nav-3 span{
+    margin-top: 1vh;
     display: inline-block;
-    margin-top: 10px;
     margin-left: 90%;
     border-right: 1px solid black;
 }
@@ -42,6 +42,9 @@
     .content-nav-3 span{
         margin-left: 88%;
     }
+    .content-nav-2 span input{
+        width: 86%
+    }
 }
 @media screen and (max-width:900px){
     .content-nav-3 span{
@@ -50,17 +53,45 @@
 }
 @media screen and (max-width:800px){
     .content-nav-2 span input{
-        width: 83%;
+        width: 78%;
     }
     .content-nav-3 span{
         margin-left: 80%;
     }
 }
-@media screen and (max-width:450px){
+@media screen and (max-width:500px){
     .content-nav-2 span input{
-        width: 75%;
+        width: 70%;
     }
     .content-nav-3 span{
         margin-left: 73%;
+    }
+}
+@media screen and (max-height:600px){
+    .content-nav{
+        height: 8vh;
+    }
+    .content-nav-3 span{
+        margin-top: 1.1vh;
+    }
+}
+@media screen and (max-height:400px){
+    .content-nav{
+        height: 11vh;
+    }
+}
+@media screen and (max-height:350px){
+    .content-nav{
+        height: 12vh;
+    }
+}
+@media screen and (max-height:300px){
+    .content-nav{
+        height: 15vh;
+    }
+}
+@media screen and (max-height:250px){
+    .content-nav{
+        height: 17vh;
     }
 }
