@@ -83,3 +83,11 @@ export const onRegister=(username,email,password)=>{
         })
     }
 }
+
+
+//====================================================================================================================
+export const cookieChecked = () => {
+    return {
+        type : 'COOKIE_CHECKED'
+    }
+}

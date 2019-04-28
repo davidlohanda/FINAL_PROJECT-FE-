@@ -200,7 +200,7 @@ class MyAuction extends React.Component{
 
 const mapStateToProps = (state )=> {
     return{
-      username : state.user.username.username
+      username : state.user.username
     }
 }
 

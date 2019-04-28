@@ -4,18 +4,21 @@ import axios from 'axios'
 import CountDown from 'react-countdown-now'
 import {connect} from 'react-redux'
 import {cartCount} from '../../1.actions'
+import {Modal, ModalHeader, ModalBody} from 'reactstrap';
+
 
 
 
 class Shop extends React.Component{
-    state = {sellAuction : [] , timer : [] , winner : []}
+    state = {sellAuction : [] , timer : [] , winner : [], modal : false, selected:0, duration:0}
 
     componentDidMount(){
         this.getAllAuction()
+        this.getWinner()
     }
 
     getWinner = () => {
-        axios.get('http://localhost:2000/bidder/winner')
+        axios.get(`http://localhost:2000/bidder/winner`)
         .then((res) => {
             console.log(res.data)
             this.setState({winner : res.data})
@@ -58,6 +61,7 @@ class Shop extends React.Component{
             })
             .then((res1)=>{
                 alert(res1.data)
+                this.getWinner()
                 this.getAllAuction()
             })
             .catch((err) => console.log(err))
@@ -101,7 +105,7 @@ class Shop extends React.Component{
     }
 
     renderSellAuction = () => {
-        var jsx = this.state.sellAuction.map((val) => {
+        var jsx = this.state.sellAuction.map((val,i) => {
             
             var endDate =  Date.parse(val.duration)
             var now = new Date().getTime()
@@ -109,11 +113,18 @@ class Shop extends React.Component{
             
             return (
                      <div className="card mt-4 mb-4 col-lg-3 col-md-5 col-12 ml-2" style={{fontSize:'15px', fontFamily:'Arial, Helvetica, sans-serif'}}>
-                        <img src={'http://localhost:2000/'+val.product_image} className="img-fluid" style={{height:'40vh'}} alt="..." />
+                        <img onClick={()=>this.setState({modal:true, selected:i, duration:distance})} src={'http://localhost:2000/'+val.product_image} className="img-fluid" style={{height:'40vh',cursor:'pointer'}} alt="..." />
                         <div className="card-body">
-                            <h5 className="card-title text-center" style={{width:'100%',fontSize:'16px', fontWeight:700}}>{val.product_name}</h5>
+                            <h5 onClick={()=>this.setState({modal:true, selected:i})}  className="card-title text-center" style={{width:'100%',fontSize:'16px', fontWeight:700, cursor:'pointer'}}>{val.product_name}</h5>
                             <hr/>
                             <p className="card-text">Current Price : Rp.{val.product_price}</p>
+                            <p className="card-text">Current Winner : 
+                            {
+                                this.state.winner.map((w) => {
+                                    return w.product_id===val.id?<p>{w.nama}</p>:null
+                                })
+                            }
+                            </p>
                             <p><CountDown  date={Date.now() + distance} renderer={this.renderer} on onComplete={()=>this.updateAndDelete(val)}/></p>
                         <button style={{backgroundColor:'#000',color:'#fff', fontSize:'15px'}} className="btn" onClick={()=>this.onBtnBidClick(val)}>Bid for Rp.{val.product_price+val.add_price}</button>
                         </div>
@@ -134,7 +145,38 @@ class Shop extends React.Component{
             return(
                 <div className="mt-5 row justify-content-center">
                     {this.renderSellAuction()}
-                    
+
+                    {/* =============MODAL================= */}
+                    <div>
+                        <Modal isOpen={this.state.modal} toggle={()=>{this.setState({modal : false})}} className={this.props.className}>
+                        <ModalHeader toggle={()=>{this.setState({modal : false})}}>{this.state.sellAuction[this.state.selected].product_name}</ModalHeader>
+                        <ModalBody>
+                        <div className="img-fluid">
+                            <img src={'http://localhost:2000/' + this.state.sellAuction[this.state.selected].product_image} width='100%' alt='broken' />
+                        </div>
+                        <div className='row'> 
+                            <div className='col-md-12'>
+                                <label className="mt-3" style={{fontWeight:500}}>Current Price :</label>
+                                <p>Rp.{this.state.sellAuction[this.state.selected].product_price}</p>
+    
+                                <label className="mt-3" style={{fontWeight:500}}>Product Description :</label>
+                                <p>{this.state.sellAuction[this.state.selected].product_desc}</p>
+
+                                <label className="mt-3" style={{fontWeight:500}}>Current Winner :</label>
+                                <p>{
+                                    this.state.winner.map((w) => {
+                                        return w.product_id===this.state.sellAuction[this.state.selected].id?<p>{w.nama}</p>:null
+                                    })
+                                }</p>
+                            </div>
+                            <div className="col-md-12 mt-3">
+                            <p><CountDown  date={Date.now() + this.state.duration} renderer={this.renderer} on onComplete={()=>this.updateAndDelete(this.state.sellAuction[this.state.selected])}/></p>
+                            <button style={{backgroundColor:'#000',color:'#fff', fontSize:'15px'}} className="btn btn-control" onClick={()=>this.onBtnBidClick(this.state.sellAuction[this.state.selected])}>Bid for Rp.{this.state.sellAuction[this.state.selected].product_price+this.state.sellAuction[this.state.selected].add_price}</button>
+                            </div>
+                        </div>
+                        </ModalBody>
+                        </Modal>
+                    </div>
                 </div>
             )
         }

@@ -1,24 +1,26 @@
-const INITIAL_STATE = {id: 0 ,username : '', password : '', error : '', loading : false, success : ''}
+const INITIAL_STATE = {id: 0 ,username : '', password : '', error : '', loading : false, success : '', cookie : false}
 
 export default (state=INITIAL_STATE, action)=>{
     if(action.type==='LOADING'){
-        return {...INITIAL_STATE, loading:true}
+        return {...INITIAL_STATE, loading:true , cookie : true} 
     }else if(action.type==='LOGIN_SUCCESS'){
-        return {...INITIAL_STATE, username:action.payload.username , role:action.payload.role}
+        return {...INITIAL_STATE, username:action.payload.username , role:action.payload.role , cookie : true}
     }else if(action.type==='USER_NOT_FOUND'){
-        return {...INITIAL_STATE, error:'Incorrect username or password'}
+        return {...INITIAL_STATE, error:'Incorrect username or password', cookie : true}
     }else if(action.type==='USER_NOT_VERIFIED'){
-        return {...INITIAL_STATE, error : 'Please verify your account first, check your email'}
+        return {...INITIAL_STATE, error : 'Please verify your account first, check your email' , cookie : true}
     }else if(action.type==='SYSTEM_ERROR'){
-        return {...INITIAL_STATE, error:'System error, please try again later'}
+        return {...INITIAL_STATE, error:'System error, please try again later', cookie : true}
     }else if(action.type==='RESET_USER'){
-        return INITIAL_STATE
+        return {...INITIAL_STATE, cookie: true}
     }else if(action.type==='USERNAME_NOT_AVAILABLE'){
-        return {...INITIAL_STATE, error:'Username already exist'}
+        return {...INITIAL_STATE, cookie : true,error:'Username already exist'}
     }else if(action.type==='REGISTER_SUCCESS'){
-        return {...INITIAL_STATE, success : action.payload}
+        return {...INITIAL_STATE, success : action.payload, cookie : true}
+    }else if(action.type==='COOKIE_CHECKED'){
+        return {...state, cookie : true}
     }else{
-        return state
+        return {...state, cookie : true}
     }
 }
 

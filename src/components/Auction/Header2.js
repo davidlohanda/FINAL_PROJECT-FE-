@@ -8,7 +8,7 @@ class Header2 extends React.Component{
             <div className="header2 mt-5">
                 <Link to="/product/1"><span>Property</span></Link>
                 <Link to="/product/2"><span>Automotive</span></Link>
-                <Link to="/product/4"><span>Watch</span></Link>
+                <Link to="/product/3"><span>Watch</span></Link>
             </div>
         )
     }

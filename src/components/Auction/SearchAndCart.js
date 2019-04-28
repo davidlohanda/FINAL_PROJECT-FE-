@@ -1,6 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+
+
+
 class SearchAndCart extends React.Component{
     render(){
         return(

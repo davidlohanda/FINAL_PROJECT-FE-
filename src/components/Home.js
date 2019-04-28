@@ -18,7 +18,7 @@ class Home extends React.Component{
                     <div className="canvas-2">
                         <Link to="/register" style={{color:'black'}}><p className="animated fadeInUp delay-2s">Register</p></Link>
                     </div>
-                    <div className="canvas-3 animated fadeInUp delay-3s">
+                    <div className="canvas-3 animated fadeInDown delay-3s">
                         <p  className="how-title">How it work?</p>
                         <div className="howTo">
                             <p><i className="fas fa-home" /> Register</p>

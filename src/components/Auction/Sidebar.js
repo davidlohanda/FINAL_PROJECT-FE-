@@ -30,6 +30,7 @@ class Sidebar extends React.Component{
                         <span className="welcome">-{this.props.username} / Admin-</span>
                         <Link to="/managecategory"><span>Manage Category</span></Link>
                         <Link to="/manageauction"><span>Manage Auction</span></Link>
+                        <Link to="/managetransaction"><span>Manage Transaction</span></Link>
                         <span onClick={this.btnSignOut}>Sign Out</span>
                         <label for="chk" className="hide-menu-btn">
                             <i className="fas fa-times"/>
@@ -50,7 +51,7 @@ class Sidebar extends React.Component{
                         <Link to="/myauction"><span>My Auction</span></Link>
                         <Link to="/createauction"><span>Create Auction</span></Link>    
                         <Link to="/cart"><span>Cart</span></Link>
-                        {this.props.role === 'admin'? <Link to="/managecategory"><span>Manage Category</span></Link> : null}
+                        <Link to="/historytransaction"><span>History Transaction</span></Link>
                         <span onClick={this.btnSignOut}>Sign Out</span>
                         <label for="chk" className="hide-menu-btn">
                             <i className="fas fa-times"/>

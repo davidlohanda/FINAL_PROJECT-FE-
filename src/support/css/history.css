@@ -1,0 +1,46 @@
+.top{
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    border-bottom: 1px solid black;
+    height: 5vh;
+}
+.top-1{
+    text-align: center;
+    border-right: 1px solid black;
+}
+.top-1 i{
+    line-height: 28px;
+}
+.top-2{
+    line-height: 28px;
+    font-size: 25px;
+    font-family: 'Staatliches', cursive;
+    text-align: center;
+}
+.top-3{
+    border-left: 1px solid black;
+}
+.mid{
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+}
+.mid-1{
+    border-right: 1px solid black;
+}
+.mid-3{
+    border-left: 1px solid black;
+}
+
+.bottom{
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    border-top: 1px solid black;
+    height: 5vh;
+}
+.bottom-1{
+    border-right: 1px solid black;
+}
+.bottom-3{
+    border-left: 1px solid black;
+}
