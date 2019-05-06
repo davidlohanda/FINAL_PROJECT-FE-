@@ -2,9 +2,10 @@ import React from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import '../support/css/login.css'
 import {connect} from 'react-redux'
-import {onLogin} from '../1.actions'
+import {onLogin,cartCount} from '../1.actions'
 import Loader from 'react-loader-spinner'
 import Cookie from 'universal-cookie'
+
 
 const cookie = new Cookie()
 
@@ -13,11 +14,13 @@ class Login extends React.Component{
         cookie.set('userData',newProps.username,{path:'/'})
     }
     
+    
+
     btnLoginClick=()=>{
         var username = this.refs.username.value
         var password = this.refs.password.value
         this.props.onLogin(username,password)
-        
+        this.props.cartCount(username)
         this.refs.username.value=''
         this.refs.password.value=''
     }
@@ -89,4 +92,4 @@ const mapStateToProps=(state)=>{
     }
 }
 
-export default connect(mapStateToProps,{onLogin})(Login) 
+export default connect(mapStateToProps,{onLogin,cartCount})(Login) 

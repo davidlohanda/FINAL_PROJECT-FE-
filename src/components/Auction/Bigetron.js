@@ -10,6 +10,7 @@ import {
 import property from '../../img/property.jpg'
 import automotive from '../../img/automotive.png'
 import watch from '../../img/watch.png'
+import happy from '../../img/happy.jpg'
 
 const items = [
   {
@@ -20,6 +21,9 @@ const items = [
   },
   {
     src: watch
+  },
+  {
+    src: happy
   }
 ];
 

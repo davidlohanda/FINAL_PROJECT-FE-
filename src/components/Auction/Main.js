@@ -12,14 +12,14 @@ import '../../support/css/mainauction.css'
 import BestAndAll from './BestAndAll';
 import How from './How';
 import SearchAndCart from './SearchAndCart'
-
+import map from '../../img/map.png'
 
 
 const cookie = new Cookie()
 const dataCookie = cookie.get('userData')
 
 
-class Main extends React.Component{
+class Main extends React.Component{    
     render(){
         if(this.props.username === ''){
             return <Home/>
@@ -34,19 +34,28 @@ class Main extends React.Component{
                     <Bigetron/>
                 </div>
                 <div>
-                    <SearchAndCart/>
-                </div>
-                <div>
                     <BestAndAll/>
                     <NewAndEnd/>
                 </div>
-                <div className="container">
+                <div>
+                    <SearchAndCart/>
+                </div>
+                <div className="mt-2" style={{background:`url(${map})`, height:'20vh', backgroundSize:'contain'}}>
+
+                </div>
+                <div className="container mt-4">
                     <Shop/>
+                </div>
+                <div className="mt-2" style={{background:`url(${map})`, height:'20vh', backgroundSize:'contain'}}>
+
                 </div>
                 <div>
                     <How/>
                 </div>
-                <div>
+                <div className="text-center" style={{fontWeight:400, fontSize:'18px', backgroundColor:'#000', color:'#fff', height:'8vh'}}>
+                    <p style={{}}><i>"Bidders are winners"</i></p>
+                </div>
+                <div className="jumbotron m-0">
                     <Footer/>
                 </div>
             </div>

@@ -8,7 +8,7 @@ class AllCategories extends React.Component{
         return(
             <div>
                 <Sidebar/>
-                <div className="mt-5">
+                <div className="mt-5 mb-5">
                     <SearchAndCart/>
                 </div>
                 <Shop/>

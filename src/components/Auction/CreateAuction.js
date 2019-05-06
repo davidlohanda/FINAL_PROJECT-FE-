@@ -75,7 +75,7 @@ class CreateAuction extends React.Component{
           this.refs.addPrice.value = ''
           this.refs.product_desc.value = ''
           this.refs.endDate.value = ''
-          this.setState({imageFile : null})
+          this.setState({imageFile : null, error : ''})
         }
       })
       .catch((err)=>console.log(err))

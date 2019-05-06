@@ -4,6 +4,10 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import '../../support/css/history.css'
+import cookie from 'universal-cookie'
+
+const Cookie = new cookie()
+
 
 class HistoryTransaction extends React.Component{
     state={history:[]}
@@ -13,11 +17,24 @@ class HistoryTransaction extends React.Component{
     }
 
     getHistory = () => {
-        axios.get(`http://localhost:2000/bidder/history?username=${this.props.username}`)
-        .then((res) => {
-            this.setState({history : res.data})
+        axios.get(`http://localhost:2000/login/getUserByUsername?username=${Cookie.get('userData')}`)
+        .then((res1)=>{
+            console.log(res1.data)
+            axios.get(`http://localhost:2000/bidder/history/${res1.data[0].id}`)
+            .then((res) => {
+                this.setState({history : res.data})
+            })
+            .catch((err) => console.log(err))
         })
-        .catch((err) => console.log(err))
+        .catch((err)=>console.log(err))
+    }
+
+    totalPrice = () => {
+        var total = 0
+        for(let i = 0 ; i < this.state.history.length ; i++){
+            total += this.state.history[i].price
+        }
+        return total
     }
 
     renderJsx = () => {
@@ -25,9 +42,10 @@ class HistoryTransaction extends React.Component{
             return(
                 <tr>
                     <td>{i+1}</td>
+                    <td>{val.code}</td>
                     <td>{val.product}</td>
                     <td>{val.date}</td>
-                    <td>Rp.{val.total}</td>
+                    <td>Rp.{val.price}</td>
                     <td>{val.status}</td>
                 </tr>
             )
@@ -73,6 +91,7 @@ class HistoryTransaction extends React.Component{
                                 <table className="mt-5 mb-5 table">
                                 <tr>
                                     <td>NO</td>
+                                    <td>NO INVOICE</td>
                                     <td>PRODUCT</td>
                                     <td>DATE</td>
                                     <td>TOTAL</td>

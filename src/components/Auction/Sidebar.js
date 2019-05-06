@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../support/css/sidebar.css'
 import {connect} from 'react-redux'
-import {resetUser} from '../../1.actions'
+import {resetUser,resetCount} from '../../1.actions'
 import Cookie from 'universal-cookie'
 import {Redirect,Link} from 'react-router-dom'
 
@@ -12,6 +12,7 @@ class Sidebar extends React.Component{
     btnSignOut=()=>{
         cookie.remove('userData')
         this.props.resetUser()
+        this.props.resetCount()
       }
     
     render(){
@@ -30,7 +31,7 @@ class Sidebar extends React.Component{
                         <span className="welcome">-{this.props.username} / Admin-</span>
                         <Link to="/managecategory"><span>Manage Category</span></Link>
                         <Link to="/manageauction"><span>Manage Auction</span></Link>
-                        <Link to="/managetransaction"><span>Manage Transaction</span></Link>
+                        <Link to="/managetransactions"><span>Manage Transaction</span></Link>
                         <span onClick={this.btnSignOut}>Sign Out</span>
                         <label for="chk" className="hide-menu-btn">
                             <i className="fas fa-times"/>
@@ -51,6 +52,7 @@ class Sidebar extends React.Component{
                         <Link to="/myauction"><span>My Auction</span></Link>
                         <Link to="/createauction"><span>Create Auction</span></Link>    
                         <Link to="/cart"><span>Cart</span></Link>
+                        <Link to="/confirmation"><span>Transaction Confirmation</span></Link>
                         <Link to="/historytransaction"><span>History Transaction</span></Link>
                         <span onClick={this.btnSignOut}>Sign Out</span>
                         <label for="chk" className="hide-menu-btn">
@@ -70,4 +72,4 @@ const mapStateToProps=(state)=>{
     }
   }
   
-  export default connect(mapStateToProps,{resetUser})(Sidebar) 
+  export default connect(mapStateToProps,{resetUser,resetCount})(Sidebar) 

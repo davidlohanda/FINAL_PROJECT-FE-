@@ -5,16 +5,16 @@ import CountDown from 'react-countdown-now'
 import {connect} from 'react-redux'
 import {cartCount} from '../../1.actions'
 import {Modal, ModalHeader, ModalBody} from 'reactstrap';
-
-
+import QueryString from 'query-string'
 
 
 class Shop extends React.Component{
-    state = {sellAuction : [] , timer : [] , winner : [], modal : false, selected:0, duration:0}
+    state = {sellAuction : [] , timer : [] , winner : [], modal : false, selected:0, duration:0, search:'',searchData:''}
 
     componentDidMount(){
         this.getAllAuction()
         this.getWinner()
+        // this.getDataUrl()
     }
 
     getWinner = () => {
@@ -105,7 +105,10 @@ class Shop extends React.Component{
     }
 
     renderSellAuction = () => {
-        var jsx = this.state.sellAuction.map((val,i) => {
+        var arrFilter = this.state.sellAuction.filter((val) => {
+            return val.product_name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        })
+        var jsx = arrFilter.map((val,i) => {
             
             var endDate =  Date.parse(val.duration)
             var now = new Date().getTime()
@@ -118,21 +121,51 @@ class Shop extends React.Component{
                             <h5 onClick={()=>this.setState({modal:true, selected:i})}  className="card-title text-center" style={{width:'100%',fontSize:'16px', fontWeight:700, cursor:'pointer'}}>{val.product_name}</h5>
                             <hr/>
                             <p className="card-text">Current Price : Rp.{val.product_price}</p>
-                            <p className="card-text">Current Winner : 
-                            {
+                            <p className="card-text">Current Winner :
+                            {   this.state.winner.length?
                                 this.state.winner.map((w) => {
-                                    return w.product_id===val.id?<p>{w.nama}</p>:null
-                                })
+                                   return  w.product_id===val.id?<p>{w.nama}</p>:null
+                                }) : <p>-</p>
                             }
                             </p>
                             <p><CountDown  date={Date.now() + distance} renderer={this.renderer} on onComplete={()=>this.updateAndDelete(val)}/></p>
-                        <button style={{backgroundColor:'#000',color:'#fff', fontSize:'15px'}} className="btn" onClick={()=>this.onBtnBidClick(val)}>Bid for Rp.{val.product_price+val.add_price}</button>
+                        <button style={{backgroundColor:'#000',color:'#fff', fontSize:'15px'}}  className="btn" onClick={()=>this.onBtnBidClick(val)}>Bid for Rp.{val.product_price+val.add_price}</button>
                         </div>
                     </div>
             )
         })
         return jsx
     }
+
+    pushUrl = () => {
+        var newLink = `/search`
+        var params = []
+        if(this.refs.inputSearch.value){
+          params.push({
+            params : 'product',
+            value : this.refs.inputSearch.value
+          })
+          newLink += '?' + params[0].params + '=' + params[0].value
+          console.log(newLink)
+          this.props.history.push(newLink)
+        }
+      }
+
+      getDataUrl = () => {
+
+        if(this.props.location.search){
+            var obj = QueryString.parse(this.props.location.search)
+            if(obj.product){
+            this.setState({searchData : obj.product})
+            }
+         
+        } 
+        
+       }
+       onChangeHandler = () => {
+        this.setState({search : this.refs.inputSearch.value})
+        // this.pushUrl()
+       }
 
     render(){
         if(this.state.sellAuction.length === 0){
@@ -143,6 +176,8 @@ class Shop extends React.Component{
             )
         }else{
             return(
+                <div>
+                    <span className="text-center" style={{display:'block'}}><i className="fas fa-search mr-2"></i><input ref="inputSearch" onChange={this.onChangeHandler}  style={{width:'40vw',height:'7vh',padding:'10px',outline:'none'}} type="text" placeholder="Search"></input></span>
                 <div className="mt-5 row justify-content-center">
                     {this.renderSellAuction()}
 
@@ -163,10 +198,10 @@ class Shop extends React.Component{
                                 <p>{this.state.sellAuction[this.state.selected].product_desc}</p>
 
                                 <label className="mt-3" style={{fontWeight:500}}>Current Winner :</label>
-                                <p>{
+                                <p>{this.state.winner.length?
                                     this.state.winner.map((w) => {
                                         return w.product_id===this.state.sellAuction[this.state.selected].id?<p>{w.nama}</p>:null
-                                    })
+                                    }) : <p>-</p>
                                 }</p>
                             </div>
                             <div className="col-md-12 mt-3">
@@ -177,6 +212,7 @@ class Shop extends React.Component{
                         </ModalBody>
                         </Modal>
                     </div>
+                </div>
                 </div>
             )
         }

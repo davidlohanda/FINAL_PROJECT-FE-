@@ -9,7 +9,7 @@ import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 
 class NewToday extends React.Component{
-    state = {todayAuction : [] , timer : [] , winner : [], modal : false, selected:0, duration:0}
+    state = {todayAuction : [] , timer : [] , winner : [], modal : false, selected:0, duration:0, search:''}
 
     componentDidMount(){
         this.getTodayAuction()
@@ -104,7 +104,11 @@ class NewToday extends React.Component{
     }
 
     renderSellAuction = () => {
-        var jsx = this.state.todayAuction.map((val,i) => {
+        var arrFilter = this.state.todayAuction.filter((val) => {
+            return val.product_name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        })
+        
+        var jsx = arrFilter.map((val,i) => {
             
             var endDate =  Date.parse(val.duration)
             var now = new Date().getTime()
@@ -119,10 +123,10 @@ class NewToday extends React.Component{
                             <p className="card-text">Current Price : Rp.{val.product_price}</p>
                             
                             <label className="mt-3" style={{fontWeight:500}}>Current Winner :</label>
-                            <p>{
+                            <p>{this.state.winner.length?
                                 this.state.winner.map((w) => {
                                     return w.product_id===val.id?<p>{w.nama}</p>:null
-                                })
+                                }) : <p>-</p>
                             }</p>
 
                             <p><CountDown  date={Date.now() + distance} renderer={this.renderer} on onComplete={()=>this.updateAndDelete(val)}/></p>
@@ -151,9 +155,10 @@ class NewToday extends React.Component{
             return(
                 <div>
                     <Sidebar/>
-                    <div className="mt-5">
+                    <div className="mt-5 mb-5">
                         <SearchAndCart/>
                     </div>
+                    <span className="text-center" style={{display:'block'}}><i className="fas fa-search mr-2"></i><input ref="inputSearch" onChange={()=>this.setState({search : this.refs.inputSearch.value})}  style={{width:'40vw',height:'7vh',padding:'10px',outline:'none'}} type="text" placeholder="Search"></input></span>
                     <div className="mt-5 row justify-content-center">
                         {this.renderSellAuction()}
 

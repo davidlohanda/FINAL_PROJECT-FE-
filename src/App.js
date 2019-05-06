@@ -20,6 +20,10 @@ import ManageProduct from './components/Auction/ManageProduct'
 import Loader from 'react-loader-spinner'
 import ScrollToTop from './components/ScrollToTop'
 import HistoryTransaction from './components/Auction/HistoryTransaction';
+import PaymentConfirmation from './components/Auction/PaymentConfirmation';
+import ManageTransaction from './components/Auction/ManageTransactions';
+import TransactionConfirm from './components/Auction/TransactionConfirm';
+
 
 
 const cookie = new Cookie()
@@ -38,7 +42,6 @@ class App extends Component {
     if(this.props.cookie){
       return (
         <div>
-
             <ScrollToTop>
               <Switch>
                 <Route path="/" component={Main} exact/>
@@ -53,7 +56,10 @@ class App extends Component {
                 <Route path="/winners" component={OurWinners} exact/>
                 <Route path="/newtoday" component={NewToday} exact/>
                 <Route path="/allcategories" component={AllCategories} exact/>
+                <Route path="/paymentconfirmation" component={PaymentConfirmation} exact/>
                 <Route path="/historytransaction" component={HistoryTransaction} exact/>
+                <Route path="/managetransactions" component={ManageTransaction} exact/>
+                <Route path="/confirmation" component={TransactionConfirm} exact/>
               </Switch>
             </ScrollToTop>
         </div>

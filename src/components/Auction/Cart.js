@@ -8,6 +8,7 @@ import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 const Cookie = new cookie()
 
+
 class Cart extends React.Component{
     state={cart:[], modal : false}
 
@@ -23,8 +24,9 @@ class Cart extends React.Component{
         })
         .catch((err) => console.log(err))
     }
-
+    
     renderJsx = () => {
+        
         var jsx = this.state.cart.map((val,i) => {
             return(
                 <tr>
@@ -37,6 +39,28 @@ class Cart extends React.Component{
         return jsx
     }
 
+    totalPrice = () => {
+        var sum = 0
+        for(var i = 0 ; i< this.state.cart.length ; i ++){
+            sum+=  this.state.cart[i].bid_price
+        }
+        return sum
+    }
+
+    product = () => {
+        var productObj = {}
+        var product = []
+
+        for(var i = 0 ; i< this.state.cart.length ; i ++){
+            productObj = {}
+            productObj.product = this.state.cart[i].product_name
+            productObj.total = this.state.cart[i].bid_price
+            product.push(productObj)
+        }
+        return product
+    }
+
+
     checkOut = () => {
         this.setState({modal : true})
     }
@@ -47,20 +71,31 @@ class Cart extends React.Component{
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
         
-        today = dd + '/' + mm + '/' + yyyy;
+        var checkoutDate = dd + '/' + mm + '/' + yyyy;
+
+
+        var checkoutProduct = []
+        for(let i = 0 ; i < this.product().length ; i++){
+            checkoutProduct.push(this.product()[i])
+            checkoutProduct[i].name = this.refs.name.value
+            checkoutProduct[i].town = this.refs.town.value
+            checkoutProduct[i].province = this.refs.province.value
+            checkoutProduct[i].address = this.refs.town.value
+            checkoutProduct[i].postalcode = this.refs.postalcode.value
+            checkoutProduct[i].phone = this.refs.phone.value
+            checkoutProduct[i].email = this.refs.email.value
+            checkoutProduct[i].checkoutdate = checkoutDate
+            checkoutProduct[i].enddate = (parseInt(dd)+1) + '/' + mm + '/' + yyyy
+            checkoutProduct[i].code = `${Date.parse(today)}`
+            checkoutProduct[i].user_id = this.state.cart[0].user_id
+        }
 
         var data = {
-            name : this.refs.name.value,
-            town : this.refs.town.value,
-            province : this.refs.province.value,
-            address : this.refs.address.value,
-            postalcode : this.refs.postalcode.value,
-            phone : this.refs.phone.value,
-            email: this.refs.email.value,
-            checkoutdate : today,
-            enddate : (parseInt(dd)+1) + '/' + mm + '/' + yyyy,
-            total : this.state.cart[0].bid_price
+            checkoutProduct,
+            qty : this.product().length,
+            total : this.totalPrice()
         }
+        console.log(data)
         axios.post(`http://localhost:2000/bidder/checkout?username=${Cookie.get('userData')}` , data)
         .then((res) => {
             alert(res.data)
@@ -115,6 +150,7 @@ class Cart extends React.Component{
                                 </tr>
                                 {this.renderJsx()}
                                 </table>
+                                <p>Total Price : Rp.{this.totalPrice()}</p>
                                 <button onClick={this.checkOut} className="btn mt-5" style={{color:'#fff', backgroundColor:'#000'}}>Checkout</button>
                                 </div>
                         </div>
